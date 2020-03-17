@@ -1,4 +1,4 @@
-# client
+# Authentication sample with vue.js (client side)
 
 ## Project setup
 ```
