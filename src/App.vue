@@ -1,32 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <nav class="navbar navbar-dark bg-primary">
+      <router-link class="navbar-brand" to="/">Auth Sample</router-link>
+        <div class="ml-auto">
+          <router-link
+            tag="button"
+            to="/login"
+            class="btn btn-outline-secondary"
+          >
+            Login
+          </router-link>
+          <router-link
+            tag="button"
+            to="/signup"
+            class="btn btn-secondary ml-2"
+          >
+            Sign Up
+          </router-link>
+        </div>
+      </nav>
+    <router-view class="container" />
   </div>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
