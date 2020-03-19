@@ -64,7 +64,7 @@
           {{ errors.confirmPassword }}
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
   </div>
 </template>
@@ -170,16 +170,18 @@ export default {
               this.isLoading = false;
               this.$router.push('/login');
             }, 500);
-          } else if (result.status === 409) {
-            // user name is duplicated
-            setTimeout(() => {
-              this.isLoading = false;
-              this.errors.username = 'このユーザ名はすでに使用されています';
-            }, 300);
           } else {
             const error = await result.json();
-            this.isLoading = false;
-            this.error = error.message;
+            if (error.message.includes('username')) {
+              // user name is duplicated
+              setTimeout(() => {
+                this.isLoading = false;
+                this.errors.username = 'このユーザ名はすでに使用されています';
+              }, 300);
+            } else {
+              this.isLoading = false;
+              this.error = error.message;
+            }
           }
         } catch (error) {
           this.isLoading = false;
