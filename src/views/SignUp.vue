@@ -166,9 +166,11 @@ export default {
           });
 
           if (result.ok) {
+            const { token } = await result.json();
+            localStorage.token = token;
             setTimeout(() => {
               this.isLoading = false;
-              this.$router.push('/login');
+              this.$router.push('/dashboard');
             }, 500);
           } else {
             const error = await result.json();
