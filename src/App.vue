@@ -37,39 +37,17 @@
 </template>
 
 <script>
-const API_URL = 'http://localhost:1337/';
-
 export default {
-  data() {
-    return {
-      user: null,
-    };
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
   },
   methods: {
     logout() {
-      localStorage.removeItem('token');
-      this.user = null;
+      this.$store.dispatch('logout');
       this.$router.push('/login');
     },
-    async checkAuth() {
-      const result = await fetch(API_URL, {
-        headers: {
-          authorization: `Bearer ${localStorage.token}`,
-        },
-      });
-      const { user } = await result.json();
-      if (user) {
-        this.user = user;
-      } else {
-        this.logout();
-      }
-    },
-  },
-  created() {
-    this.checkAuth();
-  },
-  watch: {
-    $route: 'checkAuth',
   },
 };
 </script>

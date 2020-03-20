@@ -139,9 +139,31 @@ export default {
         console.log(error);
       }
     },
+    async checkAuth() {
+      let result;
+      try {
+        result = await fetch(API_URL, {
+          headers: {
+            authorization: `Bearer ${localStorage.token}`,
+          },
+        });
+      } catch (error) {
+        console.error(error);
+        this.$router.push('/login');
+      }
+
+      const { user } = await result.json();
+      if (user) {
+        this.$store.dispatch('setUser', user);
+        this.getNotes();
+      } else {
+        this.$store.dispatch('logout');
+        this.$router.push('/login');
+      }
+    },
   },
   created() {
-    this.getNotes();
+    this.checkAuth();
   },
 };
 </script>
