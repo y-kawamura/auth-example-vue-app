@@ -71,9 +71,9 @@
         :key="note._id"
         class="card border-primary mb-3"
       >
-        <div class="card-header">{{ note.title }}</div>
+        <div class="card-header bg-primary text-white h4">{{ note.title }}</div>
         <div class="card-body">
-          <p class="card-text">{{ note.note }}</p>
+          <p class="card-text" v-html="renderMarkDown(note.note)"></p>
         </div>
       </div>
     </section>
@@ -81,6 +81,10 @@
 </template>
 
 <script>
+import MarkdownIt from 'markdown-it';
+
+const md = new MarkdownIt();
+
 const API_URL = 'http://localhost:1337';
 
 export default {
@@ -101,6 +105,9 @@ export default {
     },
   },
   methods: {
+    renderMarkDown(note) {
+      return md.render(note);
+    },
     async addNote() {
       console.log(this.newNote);
       const result = await fetch(`${API_URL}/api/v1/notes`, {
