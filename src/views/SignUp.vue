@@ -130,7 +130,7 @@ export default {
       if (!validate.emptyRule(this.user.password)) {
         this.errors.password = 'パスワードが入力されていません';
       } else if (!validate.limitRule(this.user.password, PASSWORD_LIMIT_MIN, PASSWORD_LIMIT_MAX)) {
-        this.errors.password = 'パスワードは２〜３０文字で入力してください';
+        this.errors.password = 'パスワードは3文字以上で入力してください';
       } else if (!validate.matchRule(this.user.password, PASSWORD_VALID_PATTERN)) {
         this.errors.password = 'パスワードはアルファベット小文字、大文字、数字、アンダーバー、ハイフンのみで入力してください';
       } else {
@@ -157,7 +157,7 @@ export default {
           password: this.user.password,
         };
         try {
-          const result = await fetch('http://localhost:1337/auth/signup', {
+          const result = await fetch('https://penta-auth-sample.herokuapp.com/auth/signup', {
             method: 'POST',
             body: JSON.stringify(newUser),
             headers: {

@@ -85,7 +85,7 @@ import MarkdownIt from 'markdown-it';
 
 const md = new MarkdownIt();
 
-const API_URL = 'http://localhost:1337';
+const API_URL = 'https://penta-auth-sample.herokuapp.com';
 
 export default {
   name: 'Dashboard',

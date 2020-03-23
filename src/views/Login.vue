@@ -106,7 +106,7 @@ export default {
         this.isLoading = true;
         // submit data
         try {
-          const result = await fetch('http://localhost:1337/auth/login', {
+          const result = await fetch('https://penta-auth-sample.herokuapp.com/auth/login', {
             method: 'POST',
             body: JSON.stringify(this.user),
             headers: {
